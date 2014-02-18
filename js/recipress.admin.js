@@ -24,13 +24,13 @@ jQuery(function($) {
 		
 		// set our settings
 		imageFrame = wp.media({
-			title: 'Choose Image',
+			title: recipress_js_localizations.imageFrame_title,
 			multiple: false,
 			library: {
-		 		type: 'image'
+		 		type: recipress_js_localizations.imageFrame_library_type
 			},
 			button: {
-		  		text: 'Use This Image'
+		  		text: recipress_js_localizations.imageFrame_button_text
 			}
 		});
 		
