@@ -49,7 +49,7 @@ include( RECIPRESS_DIR . 'php/widgets.php' );
 // Styles and Scripts
 add_action( 'admin_enqueue_scripts', 'recipress_admin_enqueue' );
 function recipress_admin_enqueue( $hook ) {
-	global $recipress_settings_page, $wp_styles;
+	global $recipress_settings_page;
 	
 	// icon css is always needed
 	wp_enqueue_style( 'recipress_icon', RECIPRESS_URL . 'css/icon.css' );
@@ -67,7 +67,7 @@ function recipress_admin_enqueue( $hook ) {
 	wp_enqueue_style( 'recipress_back', RECIPRESS_URL . 'css/recipress.admin.css' );
 	wp_enqueue_style( 'chosen', RECIPRESS_URL . 'css/chosen.css' );
 	wp_enqueue_style( 'recipress_back_ie', RECIPRESS_URL . 'css/ie.css' );
-	$wp_styles->add_data( 'recipress_back_ie', 'conditional', 'lt IE 9' );
+	wp_style_add_data( 'recipress_back_ie', 'conditional', 'lt IE 9' );
 }
 
 add_action( 'wp_enqueue_scripts', 'recipress_wp_enqueue' );
@@ -84,7 +84,9 @@ function activate_recipress_taxonomies() {
 	register_recipress_taxonomies();
 	// insert terms
 	recipress_default_taxonomies();
-	$GLOBALS['wp_rewrite']->flush_rules();
+	
+	// Flush rewrite rules
+	flush_rewrite_rules();
 }
 
 /**
