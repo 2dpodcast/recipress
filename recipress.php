@@ -60,22 +60,23 @@ function recipress_admin_enqueue( $hook ) {
 	if ( $hook != $recipress_settings_page && isset( $post_type ) && $post_type != recipress_options( 'post_type' )  )
 		return;
 
-	// Set the suffix for debugging
-	$suffix = SCRIPT_DEBUG ? '' : '.min';
+	// To min, or not to min? That is the question.
+	$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 	// js
-	wp_register_script( 'chosen', RECIPRESS_URL . "js/chosen{$suffix}.js", array( 'jquery' ), '', true );
+	wp_register_script( 'chosen', RECIPRESS_URL . "js/chosen{$min}.js", array( 'jquery' ), '', true );
 	wp_enqueue_script( 'recipress-back', RECIPRESS_URL . 'js/recipress.admin.js', array( 'jquery', 'jquery-ui-sortable', 'chosen' ), '', true );
 	// js localization text
 	$recipress_js_localizations = array(
 		'imageFrame_title'        => __( 'Choose Image',   'recipress' ),
 		'imageFrame_library_type' => __( 'image',          'recipress' ),
 		'imageFrame_button_text'  => __( 'Use This Image', 'recipress' ),
+		'pluginDir'               => esc_url_raw( RECIPRESS_URL ),
 	);
 	wp_localize_script( 'recipress-back', 'recipress_js_localizations', $recipress_js_localizations );
 	// css
 	wp_enqueue_style( 'recipress-back', RECIPRESS_URL . 'css/recipress.admin.css' );
-	wp_enqueue_style( 'chosen', RECIPRESS_URL . "css/chosen{$suffix}.css" );
+	wp_enqueue_style( 'chosen', RECIPRESS_URL . "css/chosen{$min}.css" );
 	wp_enqueue_style( 'recipress-back-ie', RECIPRESS_URL . 'css/ie.css' );
 	wp_style_add_data( 'recipress-back-ie', 'conditional', 'lt IE 9' );
 }

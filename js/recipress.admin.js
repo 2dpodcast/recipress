@@ -58,7 +58,7 @@ jQuery(function($) {
 
 	$( '.recipress_clear_image_button' ).click(function() {
 		$(this).parent().siblings( '.recipress_upload_image' ).val( '' );
-		$(this).parent().siblings( '.recipress_preview_image' ).attr( 'src', pluginDir + 'img/image.png' );
+		$(this).parent().siblings( '.recipress_preview_image' ).attr( 'src', recipress_js_localizations.pluginDir + 'img/image.png' );
 		return false;
 	});
 
@@ -68,7 +68,7 @@ jQuery(function($) {
 		var row = $(this).parentsUntil( 'td' ).find('.tbody>.tr:last');
 		var clone = row.clone();
 		// remove chosen
-		clone.find('.chosen').removeAttr('style', '').removeClass('chzn-done').data('chosen', null).next().remove();
+		//clone.find('.chosen').removeAttr('style', '').removeClass('chzn-done').data('chosen', null).next().remove();
 		row.after(clone);
 		// clear values
 		clone.find('input[type=text], textarea, select').val('')
@@ -85,7 +85,7 @@ jQuery(function($) {
 				});
 			});
 		// clear the image
-		clone.find('.recipress_preview_image').attr('src', pluginDir + 'img/image.png')
+		clone.find('.recipress_preview_image').attr('src', recipress_js_localizations.pluginDir + 'img/image.png')
 		// put chosen back
 		clone.find('.chosen').chosen({
 			create_option: true,
