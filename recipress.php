@@ -64,20 +64,20 @@ function recipress_admin_enqueue( $hook ) {
 	$suffix = SCRIPT_DEBUG ? '' : '.min';
 
 	// js
-	wp_register_script( 'chosen_js', RECIPRESS_URL . "js/chosen{$suffix}.js", array( 'jquery' ), '', true );
-	wp_enqueue_script( 'recipress_back_js', RECIPRESS_URL . 'js/recipress.admin.js', array( 'jquery', 'jquery-ui-sortable', 'chosen' ), '', true );
+	wp_register_script( 'chosen', RECIPRESS_URL . "js/chosen{$suffix}.js", array( 'jquery' ), '', true );
+	wp_enqueue_script( 'recipress-back', RECIPRESS_URL . 'js/recipress.admin.js', array( 'jquery', 'jquery-ui-sortable', 'chosen' ), '', true );
 	// js localization text
 	$recipress_js_localizations = array(
 		'imageFrame_title'        => __( 'Choose Image',   'recipress' ),
 		'imageFrame_library_type' => __( 'image',          'recipress' ),
 		'imageFrame_button_text'  => __( 'Use This Image', 'recipress' ),
 	);
-	wp_localize_script( 'recipress_back_js', 'recipress_js_localizations', $recipress_js_localizations );
+	wp_localize_script( 'recipress-back', 'recipress_js_localizations', $recipress_js_localizations );
 	// css
-	wp_enqueue_style( 'recipress_back_css', RECIPRESS_URL . 'css/recipress.admin.css' );
-	wp_enqueue_style( 'chosen_css', RECIPRESS_URL . "css/chosen{$suffix}.css" );
-	wp_enqueue_style( 'recipress_back_ie', RECIPRESS_URL . 'css/ie.css' );
-	wp_style_add_data( 'recipress_back_ie', 'conditional', 'lt IE 9' );
+	wp_enqueue_style( 'recipress-back', RECIPRESS_URL . 'css/recipress.admin.css' );
+	wp_enqueue_style( 'chosen', RECIPRESS_URL . "css/chosen{$suffix}.css" );
+	wp_enqueue_style( 'recipress-back-ie', RECIPRESS_URL . 'css/ie.css' );
+	wp_style_add_data( 'recipress-back-ie', 'conditional', 'lt IE 9' );
 }
 
 add_action( 'wp_enqueue_scripts', 'recipress_wp_enqueue' );
