@@ -3,10 +3,10 @@
 /* Register Taxonomies
 ------------------------------------------------------------------------- */
 function register_recipress_taxonomies() {
-	
+
 	// ingredients
-	register_taxonomy( 'ingredient', recipress_options( 'post_type' ), array( 
-		'labels' 			=> array( 
+	register_taxonomy( 'ingredient', recipress_options( 'post_type' ), array(
+		'labels' 			=> array(
 			'name' 				=> _x( 'Ingredients', 'taxonomy general name', 'recipress' ),
 			'singular_name' 	=> _x( 'Ingredient', 'taxonomy singular name', 'recipress' ),
 			'search_items'		=> __( 'Search Ingredients', 'recipress' ),
@@ -26,14 +26,14 @@ function register_recipress_taxonomies() {
 		'show_ui' 			=> false,
 		'show_tagcloud' 	=> false,
 		'hierarchical'	 	=> false,
-		
+
 		'rewrite' 			=> true,
 		'query_var' 		=> true
 	) );
-	
-	// cuisines	
-	register_taxonomy( 'cuisine', recipress_options( 'post_type' ), array( 
-		'labels' 			=> array( 
+
+	// cuisines
+	register_taxonomy( 'cuisine', recipress_options( 'post_type' ), array(
+		'labels' 			=> array(
 			'name' 				=> _x( 'Cuisines', 'taxonomy general name', 'recipress' ),
 			'singular_name' 	=> _x( 'Cuisine', 'taxonomy singular name', 'recipress' ),
 			'search_items'		=> __( 'Search Cuisines', 'recipress' ),
@@ -56,10 +56,10 @@ function register_recipress_taxonomies() {
 		'rewrite' 			=> true,
 		'query_var' 		=> true
 	) );
-	
-	// courses	
-	register_taxonomy( 'course', recipress_options( 'post_type' ), array( 
-		'labels' 			=> array( 
+
+	// courses
+	register_taxonomy( 'course', recipress_options( 'post_type' ), array(
+		'labels' 			=> array(
 			'name' 				=> _x( 'Courses', 'taxonomy general name', 'recipress' ),
 			'singular_name' 	=> _x( 'Course', 'taxonomy singular name', 'recipress' ),
 			'search_items'		=> __( 'Search Courses', 'recipress' ),
@@ -82,10 +82,10 @@ function register_recipress_taxonomies() {
 		'rewrite' 			=> true,
 		'query_var' 		=> true
 	) );
-	
-	// skill_levels	
-	register_taxonomy( 'skill_level', recipress_options( 'post_type' ), array( 
-		'labels' 			=> array( 
+
+	// skill_levels
+	register_taxonomy( 'skill_level', recipress_options( 'post_type' ), array(
+		'labels' 			=> array(
 			'name' 				=> _x( 'Skill Levels', 'taxonomy general name', 'recipress' ),
 			'singular_name' 	=> _x( 'Skill Level', 'taxonomy singular name', 'recipress' ),
 			'search_items'		=> __( 'Search Skill Levels', 'recipress' ),

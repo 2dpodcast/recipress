@@ -38,7 +38,7 @@ function recipress_options( $field ) {
 
 	$options = wp_parse_args( $saved, $defaults );
 	$options = array_intersect_key( $options, $defaults );
-	
+
 	return $options[$field];
 }
 
@@ -262,8 +262,8 @@ function recipress_insert_thumbnails( $recipress_options_fields ) {
 			)
 		)
 	);
-	
-	if( current_theme_supports( 'post-thumbnails' ) ) 
+
+	if( current_theme_supports( 'post-thumbnails' ) )
     	return recipress_array_insert( $recipress_options_fields, 'theme', $thumbnails );
 	else
 		return $recipress_options_fields;
@@ -289,7 +289,7 @@ function recipress_do_page() {
 			// start a loop through the fields
 			$sections = 0;
 			foreach ( $fields as $field) {
-				
+
 			// section titles
 			if ( $field['type'] == 'section' ) {
 				$sections++;
@@ -299,16 +299,16 @@ function recipress_do_page() {
 				// start a table
 				echo '<div class="inside"><table class="form-table">';
 			}
-			
+
 			else {
 				// start a table row
 				echo '<tr valign="top">
 						<th scope="row"><label for="' . esc_attr( $field['id'] ) . '">' . esc_html( $field['label'] ) . '</label></th>
 						<td>';
-						
+
 						$setting = recipress_options( $field['id'] );
 						echo recipress_field( $field, $setting, true, 'recipress_options' );
-					
+
 				echo     '<td>
 					</tr>';
 			} // end if section else
@@ -332,7 +332,7 @@ function recipress_validate( $input ) {
 				$sanitizer = null;
 				continue;
 			}
-			
+
 		$id = $field['id'];
 		if ( isset( $input[$id] ) ) {
 			$sanitizer = isset( $field['sanitizer'] ) ? $field['sanitizer'] : 'sanitize_text_field';

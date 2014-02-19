@@ -1,9 +1,9 @@
 === ReciPress ===
-Contributors: tammyhart  
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tammyhartdesigns%40gmail%2ecom&item_name=Recipe%20Box%20Plugin%20Latte%20Fund&no_shipping=0&no_note=1&tax=0&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8  
-Tags: recipe, hRecipe, ingredients, cuisine, course, skill level, taxonomy, widget  
-Requires at least: 3.5  
-Tested up to: 3.5.1  
+Contributors: tammyhart
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tammyhartdesigns%40gmail%2ecom&item_name=Recipe%20Box%20Plugin%20Latte%20Fund&no_shipping=0&no_note=1&tax=0&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
+Tags: recipe, hRecipe, ingredients, cuisine, course, skill level, taxonomy, widget
+Requires at least: 3.5
+Tested up to: 3.5.1
 Stable tag: 1.9.4
 
 
@@ -62,7 +62,7 @@ See our [Documentation](http://recipress.com/docs) for more information.
 **A:** Yes! Use the template tag `recipress_terms( $taxonomy, $args)`. The `$args` variable accepts the same attributs as [`get_terms()`](http://codex.wordpress.org/Function_Reference/get_terms). **Note:** This only supports a list output, not a cloud.
 
 = Q: Can I output recent Recipes without using a widget? =
-**A:** Yes! Use the template tag `recipress_recent( $num , $image)`. 
+**A:** Yes! Use the template tag `recipress_recent( $num , $image)`.
 * `$num` should be set to the number of posts you want to output and is set to 5 if ommitted.
 * `$image` should be set for displaying an image(1) thumbnail in the list or not(0) ans is set to 1 by default.
 

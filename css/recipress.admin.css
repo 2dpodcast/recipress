@@ -1,5 +1,5 @@
-	
-.recipress-clear { 
+
+.recipress-clear {
 	clear:both !important;
 	height:0 !important;
 	width:100% !important;
@@ -10,11 +10,11 @@
 	line-height:0 !important;
 	font-size:1px !important;
 	}
-	
+
 /*
  * -----------------------------
  * Meta Box
- * ----------------------------- 
+ * -----------------------------
  */
 #recipress .inside,
 #recipress_options .inside {
@@ -44,7 +44,7 @@
 	margin:0;
 }
 
-#recipress .form-table th, 
+#recipress .form-table th,
 #recipress .form-table td,
 #recipress_options .form-table th,
 #recipress_options .form-table td {
@@ -261,9 +261,9 @@
 	background:none;
 }
 
-.ingredient_add, 
+.ingredient_add,
 .ingredient_remove,
-.instruction_add, 
+.instruction_add,
 .instruction_remove {
 	display:block;
 	width:18px;
@@ -272,12 +272,12 @@
 	margin:8px 3px 0 -2px;
 }
 
-.ingredient_add, 
+.ingredient_add,
 .instruction_add {
 	background-position:-30px -100px;
 }
 
-.ingredient_remove, 
+.ingredient_remove,
 .instruction_remove {
 	background-position:-50px -100px;
 }
@@ -314,9 +314,9 @@
 /*
  * -----------------------------
  * Options
- * ----------------------------- 
+ * -----------------------------
  */
- 
+
 #recipress_options .title {
 	border-bottom:1px dotted #ccc;
 	padding-bottom:5px;

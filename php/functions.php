@@ -7,12 +7,12 @@
  * @param	string	$key	the key where something should be added before or after
  * @param	array	$arr2	the array to add to the first array
  * @param	bool	$before	whether or not to add $arr2 before or after $key
- * 
+ *
  * @return	array			merged array with item in new the specified location of the original array
  */
 function recipress_array_insert( $arr1, $key, $arr2, $before = false) {
 	$index = array_search( $key, array_keys( $arr1) );
-	
+
 	if( $index === FALSE)
 		$index = count( $arr1 );
 	else
@@ -25,23 +25,23 @@ function recipress_array_insert( $arr1, $key, $arr2, $before = false) {
 
 /**
  * remove item from an array by key
- * 
+ *
  * @param	array	{anon}	the array to remove from
  * @param	string	{anon}	the item(s) to remove fro the array. add as many strings as you want
  *
  * @return	array			original array with the items removed
  */
-function recipress_array_remove() { 
-    $args = func_get_args(); 
-    $array = $args[0]; 
-    $keys = array_slice( $args,1 ); 
-      
-    foreach( $array as $k => $v ) { 
-        if( in_array( $k, $keys ) ) 
-            unset( $array[$k] ); 
-    } 
-    return $array; 
-} 
+function recipress_array_remove() {
+    $args = func_get_args();
+    $array = $args[0];
+    $keys = array_slice( $args,1 );
+
+    foreach( $array as $k => $v ) {
+        if( in_array( $k, $keys ) )
+            unset( $array[$k] );
+    }
+    return $array;
+}
 
 /**
  * Conditional for if the post as a recipe
@@ -73,12 +73,12 @@ function recipress_post_type() {
 function recipress_output() {
 	$output = false;
 	$outputs = recipress_options( 'output' );
-	
+
 	if( is_home() && in_array( 'home', $outputs ) ) $output = true;
 	if( is_single() && in_array( 'single', $outputs ) ) $output = true;
 	if( is_archive() && in_array( 'archive', $outputs ) ) $output = true;
 	if( is_search() && in_array( 'search', $outputs ) ) $output = true;
-	
+
 	return $output;
 }
 
@@ -186,11 +186,11 @@ function recipress_ingredients_list( $ingredients ) {
 		$measurement = $ingredient['measurement'];
 		$the_ingredient = $ingredient['ingredient'];
 		$notes = $ingredient['notes'];
-		
+
 		if(!$ingredient['ingredient']) continue;
-		
+
 		$output .= '<li class="ingredient">';
-		if ( isset( $amount ) || isset( $measurement ) ) 
+		if ( isset( $amount ) || isset( $measurement ) )
 			$output .= '<span class="amount">' . $amount . ' ' . $measurement . '</span> ';
 		if ( isset( $the_ingredient ) )
 			$term = get_term_by( 'name', $the_ingredient, 'ingredient' );
@@ -200,11 +200,11 @@ function recipress_ingredients_list( $ingredients ) {
 			else
 				$output .= $the_ingredient;
 			$output .= '</span> ';
-		if ( isset( $notes ) ) 
+		if ( isset( $notes ) )
 			$output .= '<i class="notes">' . $notes . '</i></li>';
 	}
 	$output .= '</ul>';
-	
+
 	return $output;
 }
 
@@ -219,17 +219,17 @@ function recipress_instructions_list( $instructions ) {
 	foreach( $instructions as $instruction ) {
 		$size = recipress_options( 'instruction_image_size' );
 		$image = $instruction['image'] != '' ? wp_get_attachment_image( $instruction['image'], $size, false, array( 'class' => 'align-' . $size ) ) : '';
-		
+
 		$output .= '<li>';
-		if ( $size == 'thumbnail' || $size == 'medium' ) 
+		if ( $size == 'thumbnail' || $size == 'medium' )
 			$output .= $image;
 		$output .= $instruction['description'];
-		if ( $size == 'large' || $size == 'full' ) 
+		if ( $size == 'large' || $size == 'full' )
 			$output .= '<br />' . $image;
 		$output .= '</li>';
 	}
 	$output .= '</ol>';
-	
+
 	return $output;
 }
 
@@ -249,10 +249,10 @@ function recipress_credit() {
  * @param	string|array|bool	$attr	any extra data that needs to be passed for a particular field
  */
 function recipress_recipe( $field, $attr = null ) {
-	
+
 	$output = false;
 	$meta = get_post_meta( get_the_ID(), $field, true );
-	
+
 	switch( $field ) {
 		// title
 		case 'title':
@@ -260,29 +260,29 @@ function recipress_recipe( $field, $attr = null ) {
 			if( $meta )
 				$output = $meta;
 		break;
-		
+
 		// photo
 		case 'photo':
-			if( current_theme_supports( 'post-thumbnails' ) && recipress_options( 'use_photo' ) == true ) 
+			if( current_theme_supports( 'post-thumbnails' ) && recipress_options( 'use_photo' ) == true )
 				$output = get_the_post_thumbnail( get_the_ID(), 'thumbnail', $attr );
 			elseif ( $meta )
 				$output = wp_get_attachment_image( $meta, 'thumbnail', false, $attr );
 		break;
-			
-		
+
+
 		// taxonomy terms: cuisine, course, skill_level
 		case 'cuisine':
 		case 'course':
 		case 'skill_level':
 			$output = get_the_term_list( get_the_ID(), $field, $attr );
 		break;
-		
+
 		// prep_time, cook_time
 		case 'prep_time':
 		case 'cook_time':
 			$output = recipress_time( $meta, $attr );
 		break;
-		
+
 		// ready_time
 		case 'ready_time':
 			$prep_time = get_post_meta( get_the_ID(), 'prep_time', true );
@@ -291,7 +291,7 @@ function recipress_recipe( $field, $attr = null ) {
 			$ready_time = $prep_time + $cook_time + $other_time;
 			$output = recipress_time( $ready_time, $attr );
 		break;
-		
+
 		// yield
 		case 'yield':
 			$servings = get_post_meta( get_the_ID(), 'servings', true );
@@ -302,30 +302,30 @@ function recipress_recipe( $field, $attr = null ) {
 			elseif ( $meta && ! $servings )
 				$output = $meta;
 		break;
-		
+
 		// ingredients
 		case 'ingredients':
 			$output = array();
 			foreach( $meta as $ingredient)
 				$output = unserialize( $ingredient );
 		break;
-		
+
 		// instructions
 		case 'instructions':
 			$output = array();
 			foreach( $meta as $instruction)
 				$output = unserialize( $instruction );
 		break;
-		
+
 		// plain output of field
 		default:
 			$output = $meta;
 		break;
-		
+
 	} // end switch
-	
+
 	return $output;
-	
+
 }
 
 /**
@@ -380,10 +380,10 @@ function recipress_sanitize( $string, $function = 'sanitize_text_field' ) {
  * @return	array				new array, fully mapped with the provided arrays
  */
 function recipress_array_map_r( $func, $meta, $sanitizer = 'sanitize_text_field' ) {
-		
+
     $newMeta = array();
 	$meta = array_values( $meta );
-	
+
 	foreach( $meta as $key => $array ) {
 		if ( $array == '' )
 			continue;
@@ -395,7 +395,7 @@ function recipress_array_map_r( $func, $meta, $sanitizer = 'sanitize_text_field'
 			break;
 		}
 		/**
-		 * the sanitizer will have all of the fields, but the item may only 
+		 * the sanitizer will have all of the fields, but the item may only
 		 * have valeus for a few, remove the ones we don't have from the santizer
 		 */
 		$keys = array_keys( $array );
@@ -411,7 +411,7 @@ function recipress_array_map_r( $func, $meta, $sanitizer = 'sanitize_text_field'
 		foreach( $array as $arrayKey => $arrayValue )
 			if ( is_array( $arrayValue ) )
 				$array[$arrayKey] = recipress_array_map_r( $func, $arrayValue, $newSanitizer[$arrayKey] );
-				
+
 		$array = array_map( $func, $array, $newSanitizer );
 		$newMeta[$key] = array_combine( $keys, array_values( $array ) );
 	}
@@ -431,7 +431,7 @@ function recipress_array_map_r( $func, $meta, $sanitizer = 'sanitize_text_field'
 function recipress_field( $field, $meta = null, $option = false, $setting = null ) {
 	if ( ! ( $field || is_array( $field ) ) )
 		return;
-	
+
 	// get field data
 	$type = isset( $field['type'] ) ? $field['type'] : null;
 	$label = isset( $field['label'] ) ? $field['label'] : null;
@@ -443,7 +443,7 @@ function recipress_field( $field, $meta = null, $option = false, $setting = null
 	$id = $name = isset( $field['id'] ) ? $field['id'] : null;
 	if ( $option )
 		$name = $setting . '[' . $name . ']';
-	
+
 	// sanitize $meta for outputting
 	if ( $meta && is_array( $meta ) )
 		$meta = recipress_array_map_r( 'recipress_sanitize', $meta, $sanitizer );
@@ -451,7 +451,7 @@ function recipress_field( $field, $meta = null, $option = false, $setting = null
 		$meta = recipress_sanitize( $meta, $sanitizer );
 	else
 		$meta = null;
-	
+
 	// perform switch
 	switch ( $type ) {
 		// text
@@ -477,7 +477,7 @@ function recipress_field( $field, $meta = null, $option = false, $setting = null
 		case 'checkbox_group':
 			echo '<ul class="meta_box_items">';
 			foreach ( $options as $option )
-				echo '<li><input type="checkbox" value="' . $option['value'] . '" name="' . esc_attr( $name ) . '[]" id="' . esc_attr( $id ) . '-' . $option['value'] . '"' , is_array( $meta ) && in_array( $option['value'], $meta ) ? ' checked="checked"' : '' , ' /> 
+				echo '<li><input type="checkbox" value="' . $option['value'] . '" name="' . esc_attr( $name ) . '[]" id="' . esc_attr( $id ) . '-' . $option['value'] . '"' , is_array( $meta ) && in_array( $option['value'], $meta ) ? ' checked="checked"' : '' , ' />
 						<label for="' . esc_attr( $id ) . '-' . $option['value'] . '">' . $option['label'] . '</label></li>';
 			echo '</ul>' . $desc;
 		break;
@@ -504,11 +504,11 @@ function recipress_field( $field, $meta = null, $option = false, $setting = null
 		break;
 		// image
 		case 'image':
-			$image = RECIPRESS_URL . 'img/image.png';	
+			$image = RECIPRESS_URL . 'img/image.png';
 			if( $meta )  {
 				$image = wp_get_attachment_image_src( $meta, 'medium' );
 				$image = $image[0];
-			}				
+			}
 			echo '<div class="recipress_image">
 					<input name="' . esc_attr( $name ) . '" type="hidden" class="recipress_upload_image" value="' . $meta . '" />',
 					'<img src="' . esc_attr( $image ) . '" class="recipress_preview_image" alt="" />
@@ -562,7 +562,7 @@ function recipress_field( $field, $meta = null, $option = false, $setting = null
 						<option value="">Select One</option>';
 				$ingredients = get_terms( 'ingredient', 'get=all' );
 				foreach ( $ingredients as $ingredient ) {
-						echo '<option value="' . $ingredient->slug . '"' . selected( $ingredient->name, $row['ingredient'], false ) . '>' . $ingredient->name . '</option>'; 
+						echo '<option value="' . $ingredient->slug . '"' . selected( $ingredient->name, $row['ingredient'], false ) . '>' . $ingredient->name . '</option>';
 						echo '<pre>'; print_r( $ingredient ); echo '</pre>';
 				}
 				echo '</select></li>';
@@ -596,7 +596,7 @@ function recipress_field( $field, $meta = null, $option = false, $setting = null
 				if( !empty( $row['image'] ) ) {
 					$image = wp_get_attachment_image_src( $row['image'], 'medium' );
 					$image = $image[0];
-				}	
+				}
 				echo '<ul class="tr" id="insutrction_row-' . $i . '">
 					<li class="td"><span class="sort"></span></li>
 					<li class="td cell-description"><textarea placeholder="' . __( 'Describe this step in the recipe', 'recipress' ) . '" class="instruction" name="' . esc_attr( $name ) . '[' . $i . '][description]" cols="40" rows="4" id="ingredient_description_' . $i . '">' . esc_html( $row['description'] ) . '</textarea></li>

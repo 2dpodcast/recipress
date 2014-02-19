@@ -80,7 +80,7 @@ function recipress_fields() {
 			'desc'	=> sprintf( __( 'Click the plus icon to add another ingredient. %1$sManage Ingedients%2$s', 'recipress' ), '<a href="'. admin_url( 'edit-tags.php?taxonomy=ingredient' ) . '">', '</a>' ),
 			'id'	=> 'ingredient',
 			'type'	=> 'ingredient',
-			'sanitizer' => array( 
+			'sanitizer' => array(
 				'amount' => 'intval',
 				'measurement' => 'sanitize_text_field',
 				'ingredient' => 'sanitize_text_field',
@@ -98,7 +98,7 @@ function recipress_fields() {
 			)
 		)
 	);
-	
+
 	return apply_filters( 'recipress_fields', $meta_fields );
 }
 
@@ -113,8 +113,8 @@ function recipress_insert_photo( $meta_fields ) {
 			'type'	=> 'image'
 		)
 	);
-	
-	if(recipress_add_photo() ) 
+
+	if(recipress_add_photo() )
     	return recipress_array_insert( $meta_fields, 'title', $photo, true );
 	else
 		return $meta_fields;
@@ -126,9 +126,9 @@ function recipress_insert_taxonomies( $meta_fields ) {
 	$taxonomies = recipress_options( 'taxonomies' );
 	if( !empty( $taxonomies ) ) {
 		foreach ( $taxonomies as $taxonomy ) {
-			
+
 			$get_taxonomy = get_taxonomy( $taxonomy );
-			
+
 			$add_taxonomies[$taxonomy] = array(
 					'label'	=> $get_taxonomy->label,
 					'id'	=> $taxonomy,
@@ -136,8 +136,8 @@ function recipress_insert_taxonomies( $meta_fields ) {
 			);
 		}
 	}
-	
-	if( $add_taxonomies ) 
+
+	if( $add_taxonomies )
     	return recipress_array_insert( $meta_fields, 'summary', $add_taxonomies );
 	else
 		return $meta_fields;
@@ -145,7 +145,7 @@ function recipress_insert_taxonomies( $meta_fields ) {
 
 // add cost field
 add_filter( 'recipress_fields', 'recipress_insert_cost' );
-function recipress_insert_cost( $meta_fields ) {	
+function recipress_insert_cost( $meta_fields ) {
 	$cost = array(
 		'cost' => array(
 			'label'	=> __( 'Cost', 'recipress' ),
@@ -156,7 +156,7 @@ function recipress_insert_cost( $meta_fields ) {
 			'type'	=> 'text'
 		)
 	);
-	
+
 	if( recipress_options( 'cost_field' ) == true )
     	return recipress_array_insert( $meta_fields, 'yield', $cost, true );
 	else
@@ -172,13 +172,13 @@ function recipress_insert_cost( $meta_fields ) {
 function recipe_show_box() {
     global $post;
 	$meta_fields = recipress_fields();
-	
+
 	wp_nonce_field( 'recipress_nonce_action', 'recipress_nonce_field' );
-	
+
 	// used in recipress.admin.js to show/hide the recipress meta fields
 	$hasRecipe = get_post_meta( $post->ID, 'hasRecipe', true);
 	echo '<p id="hasRecipe_box"><input type="checkbox"' . checked( $hasRecipe, 'Yes', false ) . ' id="hasRecipe" name="hasRecipe" value="Yes" /><label for="hasRecipe">' . __( 'Add a recipe?', 'recipress' ) . '</label></p>';
-	
+
 	// recipress meta fields
     echo '<div id="recipress_table"><table class="form-table">';
     foreach ( $meta_fields as $field) {
@@ -193,10 +193,10 @@ function recipe_show_box() {
 			echo '<tr>
 					<th style="width:20%"><label for="' . $field['id'] . '">' . $field['label'] . '</label></th>
 					<td>';
-					
+
 					$meta = get_post_meta( $post->ID, $field['id'], true);
 					echo recipress_field( $field, $meta );
-					
+
 			echo     '<td>
 				</tr>';
 		}
@@ -211,9 +211,9 @@ add_action( 'save_post', 'recipe_save_data' );
 // Save data from meta box
 function recipe_save_data( $post_id) {
 	global $post_type;
-	
+
     $meta_fields = recipress_fields();
-	
+
 	// verify nonce
 	if ( !$post_type == recipress_options( 'post_type' ) || !isset( $_POST['recipress_nonce_field'] ) || !wp_verify_nonce( $_POST['recipress_nonce_field'], 'recipress_nonce_action' ) )
 		return $post_id;
@@ -223,7 +223,7 @@ function recipe_save_data( $post_id) {
 	// check permissions
 	if ( !current_user_can( 'edit_page', $post_id ) )
 		return $post_id;
-	
+
 	// set the value of hasRecipe
 	$hasRecipe_old = get_post_meta( $post_id, 'hasRecipe', true);
 	$hasRecipe_new = $_POST['hasRecipe'];
@@ -239,17 +239,17 @@ function recipe_save_data( $post_id) {
 			$old = get_post_meta( $post_id, $field['id'], true);
 			$new = $_POST[$field['id']];
 			if ( $new && $new != $old) {
-				if ( 'ingredient' == $field['id']) 
+				if ( 'ingredient' == $field['id'])
 					foreach ( $new as &$ingredient) $ingredient['measurement'] = $ingredient['measurement'];
 				update_post_meta( $post_id, $field['id'], $new);
 			} elseif ( '' == $new && $old) {
 				delete_post_meta( $post_id, $field['id'], $old);
 			}
 		}
-		
+
 		// save taxonomies
 		$post = get_post( $post_id);
-		if ( ( $post->post_type == recipress_options( 'post_type' ) ) ) { 
+		if ( ( $post->post_type == recipress_options( 'post_type' ) ) ) {
 			$the_ingredients = $_POST['ingredient'];
 			foreach( $the_ingredients as $the_ingredient )
 					$ingredients[] = sanitize_text_field( $the_ingredient['ingredient'] );

@@ -16,14 +16,14 @@ function get_recipress_terms( $taxonomy, $args = null, $type = null) {
 		$output = '<p class="' . $taxonomy . '-cloud">' . wp_tag_cloud( $args) . '</p>';
 	} else {
 		$terms = get_terms( $taxonomy, $args);
-		
+
 		$output = '<ul class="' . $taxonomy . '-list">';
 		foreach( $terms as $term) {
 			$output .= '<li><a href="' . get_term_link( $term->slug, $taxonomy) . '">' . $term->name . '</a></li>';
 		}
 		$output .= '</ul>';
 	}
-	
+
 	return $output;
 }
 
@@ -81,10 +81,10 @@ class recipress_terms_widget extends WP_Widget {
 					'name' => $tax->label
 					);
 			}
-			
+
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'recipress' ); ?></label> 
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'recipress' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
@@ -97,10 +97,10 @@ class recipress_terms_widget extends WP_Widget {
 		</p>
 		<p>
 		<label><?php _e( 'Output Type:', 'recipress' ); ?></label> <br />
-		<label><input id="<?php echo $this->get_field_id( 'type' ); ?>_list" name="<?php echo $this->get_field_name( 'type' ); ?>" type="radio"<?php if( $type == 'list' ) echo ' checked="checked"'; ?> value="list" /><?php _e( 'List', 'recipress' ); ?></label> &nbsp; 
+		<label><input id="<?php echo $this->get_field_id( 'type' ); ?>_list" name="<?php echo $this->get_field_name( 'type' ); ?>" type="radio"<?php if( $type == 'list' ) echo ' checked="checked"'; ?> value="list" /><?php _e( 'List', 'recipress' ); ?></label> &nbsp;
 		<label><input id="<?php echo $this->get_field_id( 'type' ); ?>_cloud" name="<?php echo $this->get_field_name( 'type' ); ?>" type="radio"<?php if( $type == 'cloud' ) echo ' checked="checked"'; ?> value="cloud" /><?php _e( 'Cloud', 'recipress' ); ?></label>
 		</p>
-		<?php 
+		<?php
 	}
 
 }
@@ -112,9 +112,9 @@ function get_recipress_recent( $atts) {
 		'num' => 5,
 		'image' => false
 	), $atts) );
-	
+
 	global $post;
-	
+
 	$args = array(
 		'meta_key' => 'hasRecipe',
 		'meta_value' => 'Yes',
@@ -135,7 +135,7 @@ function get_recipress_recent( $atts) {
 	else :
 		$output = '<p>' . __( 'No recipes found.', 'recipress' ) . '</p>';
 	endif;
-	
+
 	wp_reset_postdata();
 	return $output;
 }
@@ -191,20 +191,20 @@ class recipress_recent_widget extends WP_Widget {
 			$title = '';
 			$num = 5;
 			$image = 1;
-		}			
+		}
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'recipress' ); ?></label> 
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'recipress' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'num' ); ?>"><?php _e( 'Number of Posts:', 'recipress' ); ?></label> 
+		<label for="<?php echo $this->get_field_id( 'num' ); ?>"><?php _e( 'Number of Posts:', 'recipress' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'num' ); ?>" name="<?php echo $this->get_field_name( 'num' ); ?>" type="text" value="<?php echo $num; ?>" />
 		</p>
 		<p>
 		<label><input id="<?php echo $this->get_field_id( 'image' ); ?>" name="<?php echo $this->get_field_name( 'image' ); ?>" type="checkbox"<?php if( $image == true) echo ' checked="checked"'; ?> value="true" /> <?php _e( 'Recipe Thumbnail', 'recipress' ); ?></label>
 		</p>
-		<?php 
+		<?php
 	}
 
 }

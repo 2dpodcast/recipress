@@ -17,9 +17,9 @@ function get_the_recipe() {
 		$recipe['title'] = '<h2 class="fn" itemprop="name">' . recipress_recipe( 'title' ) . '</h2>';
 		$recipe['photo'] = recipress_recipe( 'photo', array( 'class' => 'alignright photo recipress_thumb', 'itemprop' => 'photo' ) );
 		$recipe['meta'] = '<p class="seo_only">' . _x( 'By', 'By Recipe Author', 'recipress' ) . ' <span class="author" itemprop="author">' . get_the_author() . '</span>
-							' . __( 'Published:', 'recipress' ) . ' <span class="published updated"><time datetime="' . get_the_date( 'Y-m-d' ) . '" itemprop="published">' . get_the_date( 'F j, Y' ) . 
+							' . __( 'Published:', 'recipress' ) . ' <span class="published updated"><time datetime="' . get_the_date( 'Y-m-d' ) . '" itemprop="published">' . get_the_date( 'F j, Y' ) .
 							'</time><span class="value-title" title="' . get_the_date( 'c' ) . '"></span></span></p>';
-					
+
 		// details
 		$recipe['details_before'] = '<ul class="recipe-details">';
 		if( recipress_recipe( 'yield' ) )
@@ -51,7 +51,7 @@ function get_the_recipe() {
 		// instructions
 		$recipe['instructions_title'] = '<h3>' . __( 'Instructions', 'recipress' ) . '</h3>';
 		$recipe['instructions'] = recipress_instructions_list( recipress_recipe( 'instruction' ) );
-			
+
 		// taxonomies
 		$recipe['taxonomies_before'] = '<ul class="recipe-taxes">';
 		$recipe['cuisine'] = recipress_recipe( 'cuisine', '<li><b>' . __( 'Cuisine', 'recipress' ) . ':</b> ', ', ', '</li>' );
