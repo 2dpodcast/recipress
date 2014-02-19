@@ -132,7 +132,7 @@ msgstr "材料"
 
 #@ recipress
 #: php/meta_box.php:65
-msgid "Click the plus icon to add another ingredient. %1$sManage Ingedients%2$s"
+msgid "Click the plus icon to add another ingredient. %1$sManage Ingredients%2$s"
 msgstr "材料を追加するには＋アイコンをクリック。 %1s材料の管理（追加、変更など）%2$s"
 
 #@ recipress

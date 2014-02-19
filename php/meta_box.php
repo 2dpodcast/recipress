@@ -77,7 +77,7 @@ function recipress_fields() {
 		),
 		'ingredient' => array(
 			'label'	=> __( 'Ingredients', 'recipress' ),
-			'desc'	=> sprintf( __( 'Click the plus icon to add another ingredient. %1$sManage Ingedients%2$s', 'recipress' ), '<a href="'. admin_url( 'edit-tags.php?taxonomy=ingredient' ) . '">', '</a>' ),
+			'desc'	=> sprintf( __( 'Click the plus icon to add another ingredient. %1$sManage Ingredients%2$s', 'recipress' ), '<a href="'. admin_url( 'edit-tags.php?taxonomy=ingredient' ) . '">', '</a>' ),
 			'id'	=> 'ingredient',
 			'type'	=> 'ingredient',
 			'sanitizer' => array(

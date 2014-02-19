@@ -1009,8 +1009,8 @@ msgstr "Receptminiatyr"
 #@ recipress
 #: php/meta_box.php:65
 #, php-format
-msgid "Click the plus icon to add another ingredient. %1$sManage Ingedients%2$s"
-msgstr "Klicka på plusikonen för att lägga till en ytterligare ingrediens. %1$sManage Ingedients%2$s"
+msgid "Click the plus icon to add another ingredient. %1$sManage Ingredients%2$s"
+msgstr "Klicka på plusikonen för att lägga till en ytterligare ingrediens. %1$sManage Ingredients%2$s"
 
 #@ recipress
 #: php/options.php:126

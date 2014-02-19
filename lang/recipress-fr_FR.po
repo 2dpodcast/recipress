@@ -136,7 +136,7 @@ msgstr "Ingrédients"
 
 #: php/meta_box.php:65
 #@ recipress
-msgid "Click the plus icon to add another ingredient. %1$sManage Ingedients%2$s"
+msgid "Click the plus icon to add another ingredient. %1$sManage Ingredients%2$s"
 msgstr "Cliquez sur l'icône plus pour ajouter un nouvel ingrédient. %1$sGérer les Ingrédients%2$s"
 
 #: php/meta_box.php:70
